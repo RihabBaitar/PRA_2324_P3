@@ -15,20 +15,21 @@ public:
 
     const K& getKey() const { return key; }
     const V& getValue() const { return value; }
+    V& getValueRef() { return value; }  // <-- esto devuelve referencia
     void setValue(const V& v) { value = v; }
 
     bool operator==(const TableEntry<K,V>& other) const {
         return key == other.key;
     }
 
-    template<typename KK, typename VV>
-    friend std::ostream& operator<<(std::ostream& out, const TableEntry<KK,VV>& e);
+    bool operator<(const TableEntry<K,V>& other) const { return key < other.key; }
+    bool operator>(const TableEntry<K,V>& other) const { return key > other.key; }
+
+    friend std::ostream& operator<<(std::ostream& out, const TableEntry<K,V>& e) {
+        out << "('" << e.key << "' => " << e.value << ")";
+        return out;
+    }
 };
 
-template<typename K, typename V>
-std::ostream& operator<<(std::ostream& out, const TableEntry<K,V>& e) {
-    out << e.key << ": " << e.value;
-    return out;
-}
-
 #endif
+
