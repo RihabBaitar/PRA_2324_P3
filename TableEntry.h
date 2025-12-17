@@ -15,7 +15,7 @@ public:
 
     const K& getKey() const { return key; }
     const V& getValue() const { return value; }
-    V& getValueRef() { return value; }  // <-- esto devuelve referencia
+    V& getValueRef() { return value; }  
     void setValue(const V& v) { value = v; }
 
     bool operator==(const TableEntry<K,V>& other) const {
